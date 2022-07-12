@@ -14,14 +14,14 @@ let attemptsLeft = 0;
 const getWord = async () => {
   const response = await fetch('https://random-words-api.vercel.app/word/verb');
   const word = await response.json();
-  randomWord = word[0].word;
+  return word[0].word;
 };
 
 //Starts Game
 const start = async () => {
   disableButtons(false);
   input.value = '';
-  await getWord();
+  randomWord = await getWord();
 
   //Creates an Array filled with _ per every letter in the word
   randomWordLetters = Array(randomWord.length).fill('__', 0, randomWord.length);
@@ -82,7 +82,8 @@ const checkWinner = (attemptsLeft, randomWordLetters) => {
   if (attemptsLeft === 0) {
     attemptsLeft = 0;
     disableButtons(true);
-    return (attempts.innerText = `${attemptsLeftText}: ${attemptsLeft} - You've Lost`);
+    return (attempts.innerText = `${attemptsLeftText}: ${attemptsLeft} - You've Lost
+     The word was: ${randomWord}`);
   }
 
   if (randomWordLetters.every((letter) => letter !== '__')) {
