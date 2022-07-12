@@ -27,7 +27,7 @@ const start = async () => {
   randomWordLetters = Array(randomWord.length).fill('__', 0, randomWord.length);
 
   //Attempts to guess the word
-  attemptsLeft = 2 * randomWord.length;
+  attemptsLeft = randomWord.length + 1;
   attempts.innerText = `${attemptsLeftText}: ${attemptsLeft}`;
 
   drawLetter(randomWordLetters);
