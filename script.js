@@ -4,7 +4,10 @@ const list = document.querySelector('#list');
 const restartBtn = document.querySelector('#restart');
 const attempts = document.querySelector('#attempts');
 const tryBtn = document.querySelector('#try');
+const error = document.querySelector('#error');
 const attemptsLeftText = 'Attempts Left';
+
+const API_URL = 'https://random-words-api.vercel.app/word/verb';
 
 let randomWord = '';
 let randomWordLetters = [];
@@ -12,7 +15,7 @@ let attemptsLeft = 0;
 
 //Gets random Word From API
 const getWord = async () => {
-  const response = await fetch('https://random-words-api.vercel.app/word/verb');
+  const response = await fetch(API_URL);
   const word = await response.json();
   return word[0].word;
 };
@@ -21,16 +24,20 @@ const getWord = async () => {
 const start = async () => {
   disableButtons(false);
   input.value = '';
-  randomWord = await getWord();
+  try {
+    randomWord = await getWord();
+    //Creates an Array filled with _ per every letter in the word
+    randomWordLetters = Array(randomWord.length).fill('__', 0, randomWord.length);
 
-  //Creates an Array filled with _ per every letter in the word
-  randomWordLetters = Array(randomWord.length).fill('__', 0, randomWord.length);
+    //Attempts to guess the word
+    attemptsLeft = randomWord.length + 1;
+    attempts.innerText = `${attemptsLeftText}: ${attemptsLeft}`;
 
-  //Attempts to guess the word
-  attemptsLeft = randomWord.length + 1;
-  attempts.innerText = `${attemptsLeftText}: ${attemptsLeft}`;
-
-  drawLetter(randomWordLetters);
+    drawLetter(randomWordLetters);
+  } catch (err) {
+    error.classList.remove('hide');
+    error.innerText = 'Something went wrong, please try restarting the game';
+  }
 };
 
 //Disables try button

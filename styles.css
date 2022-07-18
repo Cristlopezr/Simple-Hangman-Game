@@ -16,7 +16,7 @@
   margin: 0;
 }
 
-p {
+#attempts {
   margin-top: 6.25rem;
 }
 
@@ -49,4 +49,8 @@ li {
   display: flex;
   flex-direction: column;
   min-width: 1.25rem;
+}
+
+.hide {
+  display: none;
 }
