@@ -13,23 +13,20 @@ let randomWord = '';
 let randomWordLetters = [];
 let attemptsLeft = 0;
 
-//Gets random Word From API
 const getWord = async () => {
   const response = await fetch(API_URL);
   const word = await response.json();
   return word[0].word;
 };
 
-//Starts Game
 const start = async () => {
   disableButtons(false);
   input.value = '';
   try {
     randomWord = await getWord();
-    //Creates an Array filled with _ per every letter in the word
+  
     randomWordLetters = Array(randomWord.length).fill('__', 0, randomWord.length);
 
-    //Attempts to guess the word
     attemptsLeft = randomWord.length + 1;
     attempts.innerText = `${attemptsLeftText}: ${attemptsLeft}`;
 
@@ -40,12 +37,10 @@ const start = async () => {
   }
 };
 
-//Disables try button
 const disableButtons = (state) => {
   tryBtn.disabled = state;
 };
 
-//Draws every letter of the word inside the html list
 const drawLetter = (randomWordLetters) => {
   list.innerHTML = '';
   return randomWordLetters.forEach((letter) => {
@@ -53,7 +48,6 @@ const drawLetter = (randomWordLetters) => {
   });
 };
 
-//Checks if the letter picked by the user is in the chosen word and calls update word function/check winner function or updateAttempts function
 const checkLetter = (e, randomWord, randomWordLetters) => {
   if (input.value !== '') {
     let letterExist = false;
@@ -71,20 +65,17 @@ const checkLetter = (e, randomWord, randomWordLetters) => {
   return (input.value = '');
 };
 
-//Updates word letters when the person picks a letter that's in the word
 const updateRandomWordLetters = (randomWordLetters, i, value) => {
   randomWordLetters[i] = value.toUpperCase();
   return randomWordLetters;
 };
 
-//Updates attempts if the person fails
 const updateAttempts = (attemptsLeft) => {
   attemptsLeft -= 1;
   attempts.innerText = `${attemptsLeftText}: ${attemptsLeft}`;
   return attemptsLeft;
 };
 
-//Cheks if the person have won or have lost
 const checkWinner = (attemptsLeft, randomWordLetters) => {
   if (attemptsLeft === 0) {
     attemptsLeft = 0;
@@ -99,18 +90,14 @@ const checkWinner = (attemptsLeft, randomWordLetters) => {
   }
 };
 
-//Event listeners
-//Checks input
 input.addEventListener('input', () => {
   input.value = input.value[0] ? input.value[0] : '';
 });
 
-//Checks word on submit
 form.addEventListener('submit', (e) => {
   checkLetter(e, randomWord, randomWordLetters);
 });
 
-//Restarts the game
 restartBtn.addEventListener('click', start);
 
 start();
