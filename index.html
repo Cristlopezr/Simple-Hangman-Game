@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
-    <title>Colgado</title>
-  </head>
-  <body class="container">
-    <p class="hide" id="error"></p>
-    <p id="attempts">Attempts Left:</p>
-    <form action="" id="form" class="form">
-      <label for="word">Write Letter</label>
-      <input type="text" id="word" />
-      <button class="button" type="submit" id="try">Try</button>
-    </form>
-    <ul id="list" class="list"></ul>
-    <button class="button" id="restart">Restart</button>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="styles.css" />
+		<script src="script.js" defer></script>
+		<title>Colgado</title>
+	</head>
+	<body>
+		<header class="text-bg-success mb-5">
+			<h1>Simple Hangman game</h1>
+		</header>
+		<div class="container">
+			<p class="hide" id="error"></p>
+			<p id="attempts">Attempts Left:</p>
+			<form action="" id="form" class="form mb-5">
+				<label class="form-label" for="word">Write Letter</label>
+				<input class="" type="text" id="word" />
+				<button class="btn btn-success" type="submit" id="try">Try</button>
+			</form>
+			<ul id="list" class="list"></ul>
+			<button class="btn btn-primary" id="restart">Restart</button>
+		</div>
+	</body>
 </html>
